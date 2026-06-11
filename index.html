@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EEConner.com | Portfolio </title>
+<meta name="description" content="Electrical Engineering Portfolio.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800;900&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   AMERICAN ENGINEERING 
+   ============================================================ */
+:root{
+  --red:#C8102E;
+  --red-bright:#FF2E4C;
+  --blue:#23406E;
+  --blue-bright:#5B83C9;
+  --gold:#D8B25C;
+
+  /* dark theme (default) */
+  --bg:#070A12;
+  --bg-2:#0B101C;
+  --text:#E9ECF4;
+  --muted:#8B93A7;
+  --line:rgba(233,236,244,.10);
+  --glass:rgba(13,18,30,.55);
+  --glass-line:rgba(233,236,244,.12);
+  --card:rgba(255,255,255,.035);
+  --card-hover:rgba(255,255,255,.07);
+  --steel-a:#F5F7FA; --steel-b:#9AA4B8; --steel-c:#FFFFFF; --steel-d:#6E7890;
+  --flag-white:#CDD4E2;
+  --shadow:0 18px 50px rgba(0,0,0,.5);
+  --grid-line:rgba(91,131,201,.06);
+  --navy-hover:#2E4E86;
+}
+[data-theme="light"]{
+  --bg:#F6F7F9;
+  --bg-2:#EDEFF4;
+  --text:#101521;
+  --muted:#5A6376;
+  --line:rgba(16,21,33,.12);
+  --glass:rgba(250,251,253,.65);
+  --glass-line:rgba(16,21,33,.10);
+  --card:rgba(255,255,255,.72);
+  --card-hover:rgba(255,255,255,.95);
+  --steel-a:#2A3142; --steel-b:#7B8499; --steel-c:#0F1420; --steel-d:#525B70;
+  --flag-white:#7E8AA3;
+  --shadow:0 18px 45px rgba(20,28,48,.12);
+  --grid-line:rgba(35,64,110,.07);
+  --navy-hover:#23406E;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',system-ui,sans-serif;
+  font-size:16px;line-height:1.65;
+  overflow-x:hidden;
+  transition:background .45s ease,color .45s ease;
+}
+::selection{background:var(--red);color:#fff}
+
+/* blueprint grid backdrop */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    linear-gradient(var(--grid-line) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);
+  background-size:56px 56px;
+  mask-image:radial-gradient(ellipse 90% 70% at 50% 0%,#000 30%,transparent 100%);
+  -webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 0%,#000 30%,transparent 100%);
+}
+
+h1,h2,h3{font-family:'Big Shoulders Display',sans-serif;line-height:1.04;text-transform:uppercase}
+.mono{font-family:'IBM Plex Mono',monospace}
+
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+section{padding:110px 0;position:relative}
+
+/* eyebrow label */
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.28em;
+  text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:14px;margin-bottom:18px;
+}
+.eyebrow::after{content:"";height:1px;width:64px;background:var(--red);opacity:.6}
+.section-title{font-size:clamp(2.4rem,5vw,3.6rem);font-weight:800;margin-bottom:14px}
+.section-sub{color:var(--muted);max-width:620px;margin-bottom:48px}
+
+/* ============================================================
+   GLASS NAV
+   ============================================================ */
+.nav{
+  position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:100;
+  width:min(1100px,calc(100% - 32px));
+  background:var(--glass);
+  -webkit-backdrop-filter:blur(18px) saturate(1.4);
+  backdrop-filter:blur(18px) saturate(1.4);
+  border:1px solid var(--glass-line);
+  border-radius:16px;
+  box-shadow:0 10px 36px rgba(0,0,0,.22);
+  transition:background .45s ease;
+}
+.nav-inner{padding:12px 22px;display:flex;align-items:center;justify-content:space-between}
+.logo{
+  font-family:'Big Shoulders Display',sans-serif;font-weight:900;font-size:1.5rem;
+  letter-spacing:.02em;text-decoration:none;color:var(--text);
+  cursor:pointer;transition:color .3s;
+}
+.logo .c,.logo .o{transition:color .3s}
+.logo:hover .c{color:var(--red)}
+.logo:hover .o{color:var(--navy-hover)}
+.nav-links{display:flex;align-items:center;gap:6px;list-style:none}
+.nav-links a{
+  position:relative;color:var(--muted);text-decoration:none;font-size:.86rem;font-weight:500;
+  padding:8px 14px;transition:color .25s;
+}
+.nav-links a::after{
+  content:"";position:absolute;left:14px;right:14px;bottom:4px;height:1.5px;
+  background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .3s ease;
+}
+.nav-links a:hover{color:var(--text)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.theme-btn{
+  margin-left:10px;width:38px;height:38px;border-radius:50%;cursor:pointer;
+  border:1px solid var(--line);background:var(--card);color:var(--text);
+  display:grid;place-items:center;font-size:.95rem;
+  transition:transform .35s ease,border-color .3s,box-shadow .3s;
+}
+.theme-btn:hover{transform:rotate(40deg) scale(1.08);border-color:var(--red);box-shadow:0 0 18px rgba(200,16,46,.25)}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  min-height:100vh;display:flex;align-items:center;position:relative;
+  padding:140px 0 80px;overflow:hidden;
+}
+/* flowing flag background — hero only, fades out at the bottom so the grid takes over */
+.flag-bg{
+  position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.13;
+  mask-image:linear-gradient(180deg,#000 50%,transparent 98%);
+  -webkit-mask-image:linear-gradient(180deg,#000 50%,transparent 98%);
+}
+[data-theme="light"] .flag-bg{opacity:.16}
+.flag-bg svg{width:100%;height:100%;display:block}
+.hero-grid{width:100%;position:relative;z-index:2}
+.hero-kicker{
+  font-family:'IBM Plex Mono',monospace;font-size:.75rem;letter-spacing:.3em;color:var(--muted);
+  text-transform:uppercase;margin-bottom:22px;display:flex;align-items:center;gap:12px;
+}
+.hero-kicker .dot{width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 12px var(--red);animation:pulse 2.2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.hero h1{
+  font-size:clamp(2.7rem,6.6vw,5.4rem);font-weight:900;letter-spacing:.005em;margin-bottom:10px;white-space:nowrap;
+}
+/* metal shine headline */
+.steel{
+  background:linear-gradient(105deg,var(--steel-a) 0%,var(--steel-b) 30%,var(--steel-c) 50%,var(--steel-d) 70%,var(--steel-a) 100%);
+  background-size:240% auto;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:sheen 7s linear infinite;
+}
+#cycleWord{display:inline-block;transition:opacity .35s ease,transform .35s ease}
+#cycleWord.swap{opacity:0;transform:translateY(.25em)}
+@keyframes sheen{to{background-position:240% center}}
+.eng-red{color:var(--red)}
+.hero-tag{
+  font-family:'IBM Plex Mono',monospace;font-size:clamp(.85rem,1.6vw,1.05rem);
+  color:var(--muted);margin:18px 0 36px;min-height:1.8em;
+}
+.hero-tag .caret{display:inline-block;width:9px;height:1.15em;background:var(--red);vertical-align:text-bottom;margin-left:3px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero-cta{display:flex;gap:16px;flex-wrap:wrap}
+.btn{
+  font-family:'IBM Plex Mono',monospace;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:14px 28px;text-decoration:none;position:relative;overflow:hidden;
+  border:1px solid var(--text);color:var(--text);transition:color .35s,border-color .35s,transform .25s;
+  display:inline-block;
+}
+.btn::before{
+  content:"";position:absolute;inset:0;background:var(--red);
+  transform:translateY(101%);transition:transform .35s cubic-bezier(.2,.8,.2,1);z-index:-1;
+}
+.btn:hover{color:#fff;border-color:var(--red);transform:translateY(-2px)}
+.btn:hover::before{transform:translateY(0)}
+.btn.solid{background:var(--red);border-color:var(--red);color:#fff}
+.btn.solid::before{background:var(--text)}
+.btn.solid:hover{color:var(--bg)}
+
+/* ============================================================
+   SILICON WAFER ORNAMENT
+   ============================================================ */
+.wafer{
+  position:absolute;left:60%;bottom:-50px;width:430px;height:600px;
+  pointer-events:none;z-index:0;opacity:.8;
+}
+.wafer svg{width:100%;height:100%;display:block}
+.wafer-label{
+  position:absolute;bottom:-16px;left:155px;
+  font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--muted);white-space:nowrap;
+}
+@media (max-width:1000px){.wafer{display:none}}
+
+
+/* ============================================================
+   PAPER TRAIL GRAPH ORNAMENTS
+   ============================================================ */
+.edu-graph{position:absolute;pointer-events:none;z-index:0;opacity:.32}
+.edu-graph .axis{stroke:var(--muted);stroke-width:1}
+.edu-graph .gridln{stroke:var(--line);stroke-width:1}
+.edu-graph .trace{fill:none;stroke-width:1.6;stroke-dasharray:5 7;animation:traceflow 4s linear infinite}
+.edu-graph .trace.b{stroke:var(--blue-bright)}
+.edu-graph .trace.r{stroke:var(--red);animation-duration:5.5s}
+.edu-graph .target{stroke:var(--muted);stroke-width:1;stroke-dasharray:2 5}
+@keyframes traceflow{to{stroke-dashoffset:-48}}
+.edu-graph.g1{top:16%;right:3%;width:280px}
+.edu-graph.g2{bottom:-50px;left:1.5%;width:250px}
+@media (max-width:1000px){.edu-graph{display:none}}
+
+/* ============================================================
+   DRAGGABLE CHARACTER PIECES
+   ============================================================ */
+.drag-item{
+  position:absolute;z-index:5;
+  font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.08em;
+  color:var(--muted);background:var(--card);border:1px solid var(--line);
+  padding:7px 12px;user-select:none;-webkit-user-select:none;touch-action:none;
+  cursor:grab;transform:rotate(var(--r,0deg));
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  transition:box-shadow .25s,border-color .25s,color .25s;
+  will-change:transform;
+}
+.drag-item:hover{border-color:var(--red);color:var(--text)}
+.drag-item.dragging{
+  cursor:grabbing;z-index:60;box-shadow:0 14px 34px rgba(0,0,0,.35);
+  border-color:var(--red);transition:none;
+}
+@media (max-width:700px){.drag-item{display:none}}
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal[data-delay="1"]{transition-delay:.12s}
+.reveal[data-delay="2"]{transition-delay:.24s}
+.reveal[data-delay="3"]{transition-delay:.36s}
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;position:relative;z-index:1}
+.about-copy p{margin-bottom:18px;color:var(--muted)}
+.about-copy strong{color:var(--text);font-weight:600}
+.about-copy a{color:var(--red);text-decoration:none;border-bottom:1.5px solid var(--red);transition:opacity .25s}
+.about-copy a:hover{opacity:.7}
+.creed{
+  font-family:'Pinyon Script',cursive;font-size:clamp(1.9rem,3.4vw,2.6rem);color:var(--text);
+  line-height:1.3;margin:26px 0 6px;transform:rotate(-1.5deg);
+}
+.creed .underline{border-bottom:1.5px solid var(--red);padding-bottom:2px}
+.about-facts{display:grid;gap:14px}
+.fact{
+  border:1px solid var(--line);background:var(--card);padding:18px 20px;
+  display:flex;justify-content:space-between;align-items:baseline;gap:14px;
+  transition:transform .3s ease,background .3s,border-color .3s;
+}
+.fact:hover{transform:translateX(8px);background:var(--card-hover);border-color:var(--red)}
+.fact .k{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.fact .v{font-family:'Big Shoulders Display',sans-serif;font-weight:700;font-size:1.25rem;text-transform:uppercase;text-align:right}
+.fact .v.red{color:var(--red)}
+
+/* ============================================================
+   EDUCATION / CERTS
+   ============================================================ */
+.edu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.edu-card{
+  border:1px solid var(--line);background:var(--card);padding:26px 24px;position:relative;overflow:hidden;
+  transition:transform .35s ease,box-shadow .35s,border-color .35s,background .35s;
+}
+.edu-card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--red);
+  transform:scaleX(0);transform-origin:left;transition:transform .4s ease;
+}
+.edu-card:hover{transform:translateY(-7px);box-shadow:var(--shadow);background:var(--card-hover);border-color:transparent}
+.edu-card:hover::before{transform:scaleX(1)}
+.status{
+  font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--muted);display:inline-block;border:1px solid var(--line);padding:4px 10px;margin-bottom:18px;
+}
+.status.live{color:var(--red);border-color:var(--red)}
+.edu-card h3{font-size:1.45rem;font-weight:800;margin-bottom:6px}
+.edu-card .org{font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--muted);margin-bottom:14px}
+.edu-card p{font-size:.9rem;color:var(--muted)}
+
+/* ============================================================
+   PROJECTS
+   ============================================================ */
+.proj-list{display:grid;gap:16px;position:relative;z-index:1}
+.proj{
+  border:1px solid var(--line);background:var(--card);padding:30px 28px;
+  display:grid;grid-template-columns:72px 1fr auto;gap:26px;align-items:start;
+  position:relative;overflow:hidden;
+  transition:background .35s,border-color .35s,transform .3s ease;
+}
+.proj::after{ /* shine sweep on hover */
+  content:"";position:absolute;inset:-60%;pointer-events:none;
+  background:linear-gradient(115deg,transparent 44%,rgba(255,255,255,.07) 50%,transparent 56%);
+  transform:translateX(-130%);transition:transform .8s ease;
+}
+.proj:hover{background:var(--card-hover);border-color:var(--red);transform:translateX(6px)}
+.proj:hover::after{transform:translateX(130%)}
+.proj .idx{
+  font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--muted);
+  border:1px solid var(--line);width:60px;height:60px;display:grid;place-items:center;
+  transition:color .3s,border-color .3s;
+}
+.proj:hover .idx{color:var(--red);border-color:var(--red)}
+.proj h3{font-size:1.6rem;font-weight:800;margin-bottom:6px;transition:color .3s}
+.proj p{color:var(--muted);font-size:.92rem;max-width:560px}
+.proj .skills{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{
+  font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--line);padding:5px 11px;color:var(--muted);
+  transition:color .25s,border-color .25s,background .25s,transform .25s;
+}
+.proj:hover .chip,.chip:hover{color:var(--text);border-color:var(--blue-bright)}
+.chip:hover{background:var(--blue-bright);color:#fff;transform:translateY(-2px)}
+.proj .domain{
+  font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--muted);writing-mode:vertical-rl;align-self:stretch;text-align:center;
+  border-left:1px solid var(--line);padding-left:18px;
+}
+
+/* ============================================================
+   SKILLS — minimal marker
+   ============================================================ */
+.skills-bar{display:flex;flex-wrap:wrap;gap:10px 26px;align-items:center;position:relative;z-index:1}
+.skill-mark{
+  font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--muted);
+  display:flex;align-items:center;gap:9px;transition:color .25s,transform .25s;cursor:default;
+}
+.skill-mark::before{content:"▸";color:var(--red);font-size:.7rem}
+.skill-mark:hover{color:var(--text);transform:translateY(-2px)}
+
+/* ============================================================
+   FOOTER / CONTACT
+   ============================================================ */
+.footer{
+  border-top:1px solid var(--line);padding:90px 0 46px;text-align:center;position:relative;
+  background:linear-gradient(180deg,transparent,var(--bg-2));
+}
+.footer .big{
+  font-family:'Big Shoulders Display',sans-serif;font-weight:900;text-transform:uppercase;
+  font-size:clamp(2.2rem,5.5vw,4rem);margin-bottom:10px;
+}
+.footer .sub{color:var(--muted);margin-bottom:34px;font-size:.95rem}
+.foot-row{
+  margin-top:64px;display:flex;align-items:center;justify-content:center;gap:26px;flex-wrap:wrap;
+}
+.foot-link{
+  font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:8px;
+  transition:color .25s,transform .25s;
+}
+.foot-link:hover{color:var(--red);transform:translateY(-2px)}
+.foot-link svg{width:20px;height:20px;fill:currentColor}
+.foot-co{
+  font-family:'Big Shoulders Display',sans-serif;font-weight:900;font-size:1.2rem;color:var(--muted);
+  transition:transform .3s;
+}
+.foot-co .c,.foot-co .o{transition:color .3s}
+.foot-co:hover{transform:translateY(-2px)}
+.foot-co:hover .c{color:var(--red)}
+.foot-co:hover .o{color:var(--navy-hover)}
+.fine{margin-top:40px;font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;opacity:.7}
+
+/* ============================================================
+   RESPONSIVE + MOTION
+   ============================================================ */
+@media (max-width:560px){
+  .hero h1{white-space:normal}
+}
+@media (max-width:900px){
+  .about-grid{grid-template-columns:1fr}
+  .edu-grid{grid-template-columns:1fr}
+  .proj{grid-template-columns:1fr}
+  .proj .idx{display:none}
+  .proj .domain{writing-mode:horizontal-tb;border-left:none;border-top:1px solid var(--line);padding:14px 0 0}
+  .nav-links a{padding:8px 8px;font-size:.8rem}
+  section{padding:80px 0}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<!-- ==================== NAV ==================== -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="#top" aria-label="Back to top"><span class="c">C</span><span class="o">o</span></a>
+    <ul class="nav-links">
+      <li><a href="#top">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><button class="theme-btn" id="themeBtn" aria-label="Toggle light and dark mode">☀</button></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<header class="hero" id="top">
+  <div class="flag-bg" aria-hidden="true">
+    <svg viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="flagWave" x="-15%" y="-15%" width="130%" height="130%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.0035 0.011" numOctaves="2" seed="7" result="n">
+            <animate attributeName="baseFrequency" dur="16s" values="0.0035 0.011;0.0055 0.015;0.0035 0.011" repeatCount="indefinite"/>
+          </feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="55" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+        <pattern id="stars" width="64" height="50" patternUnits="userSpaceOnUse">
+          <text x="6" y="22" font-size="17" fill="var(--blue-bright)">&#9733;</text>
+          <text x="38" y="46" font-size="17" fill="var(--blue-bright)">&#9733;</text>
+        </pattern>
+      </defs>
+      <g filter="url(#flagWave)">
+        <rect x="-60" y="-28" width="1320" height="58" fill="var(--red)"/>
+        <rect x="-60" y="30"  width="1320" height="58" fill="var(--flag-white)"/>
+        <rect x="-60" y="88"  width="1320" height="58" fill="var(--red)"/>
+        <rect x="-60" y="146" width="1320" height="58" fill="var(--flag-white)"/>
+        <rect x="-60" y="204" width="1320" height="58" fill="var(--red)"/>
+        <rect x="-60" y="262" width="1320" height="58" fill="var(--flag-white)"/>
+        <rect x="-60" y="320" width="1320" height="58" fill="var(--red)"/>
+        <rect x="-60" y="378" width="1320" height="58" fill="var(--flag-white)"/>
+        <rect x="-60" y="436" width="1320" height="58" fill="var(--red)"/>
+        <rect x="-60" y="494" width="1320" height="58" fill="var(--flag-white)"/>
+        <rect x="-60" y="552" width="1320" height="58" fill="var(--red)"/>
+        <rect x="-60" y="610" width="1320" height="58" fill="var(--flag-white)"/>
+        <rect x="-60" y="668" width="1320" height="60" fill="var(--red)"/>
+        <rect x="-60" y="-28" width="540" height="406" fill="var(--blue)"/>
+        <rect x="-60" y="-28" width="540" height="406" fill="url(#stars)"/>
+      </g>
+    </svg>
+  </div>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="hero-kicker"><span class="dot"></span>EE Student · Minneapolis, MN · Open to Work</div>
+      <h1><span class="steel" id="cycleWord">American</span> <span class="eng-red">Engineering</span></h1>
+      <p class="hero-tag mono"><span id="typeTarget"></span><span class="caret"></span></p>
+      <div class="hero-cta">
+        <a class="btn solid" href="#projects">View the Work</a>
+        <a class="btn" href="#contact">Get in Touch</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ==================== ABOUT ==================== -->
+<section id="about">
+  <div class="wafer" aria-hidden="true">
+    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="dies" width="26" height="26" patternUnits="userSpaceOnUse">
+          <rect x="1.5" y="1.5" width="23" height="23" fill="none" stroke="var(--line)" stroke-width="1"/>
+        </pattern>
+        <radialGradient id="iris" cx="38%" cy="30%" r="85%">
+          <animate attributeName="cx" values="30%;60%;36%;30%" dur="14s" repeatCount="indefinite"/>
+          <animate attributeName="cy" values="26%;44%;62%;26%" dur="17s" repeatCount="indefinite"/>
+          <stop offset="0%" stop-color="var(--blue-bright)" stop-opacity=".30"/>
+          <stop offset="38%" stop-color="var(--gold)" stop-opacity=".16"/>
+          <stop offset="68%" stop-color="var(--red)" stop-opacity=".16"/>
+          <stop offset="100%" stop-color="var(--blue)" stop-opacity=".34"/>
+        </radialGradient>
+        <clipPath id="waferClip">
+          <circle cx="200" cy="200" r="180"/>
+        </clipPath>
+      </defs>
+      <circle cx="200" cy="200" r="180" fill="url(#iris)"/>
+      <g clip-path="url(#waferClip)">
+        <rect x="0" y="0" width="400" height="400" fill="url(#dies)"/>
+      </g>
+      <circle cx="200" cy="200" r="180" fill="none" stroke="var(--muted)" stroke-width="1.5" opacity=".7"/>
+    </svg>
+    <span class="wafer-label">300mm &#8226; Si</span>
+  </div>
+  <span class="drag-item" style="top:14%;right:7%;--r:4deg" aria-hidden="true">&#955; 193nm</span>
+  <div class="wrap">
+    <div class="eyebrow reveal">01 / Who I Am</div>
+    <h2 class="section-title reveal">Built to a Higher Standard</h2>
+    <div class="about-grid">
+      <div class="about-copy reveal" data-delay="1">
+        <p>I'm an <strong>electrical engineering student</strong> obsessed with optimization — pulling more performance, more reliability, and more capability out of every circuit, every line of firmware, every system. Hardware pushed to its full potential is how great things get built, and that's the standard I hold my work to.</p>
+        <p>Building on my interest in cybersecurity, I am shifting my focus toward engineering physical defense hardware, specifically targeting <strong>Counter-UAS for defense</strong>, I apply this cross-disciplinary background directly to low-latency embedded systems, real-time threat detection, and electronic countermeasures development.</p>
+        <p>My interest in nuclear technology is grounded in execution. To help accelerate development timelines and advocate for the industry's future, I built <a href="https://smrdb.com" target="_blank" rel="noopener">SMRDB.com</a>, By turning complex data on small modular reactors into an open, accessible database, this project serves as a technical resource designed to push development boundaries and spread essential awareness to the cause.</p>
+        <p><strong>Photolithography</strong> is on my radar too — the process that turns sand into chips used in everything. For now it's an interest rather than a pursuit: the tooling lives in billion-dollar cleanrooms, and that's not a door a student budget opens. But I follow the field closely, and when the opportunity shows up, I intend to be ready for it.</p>
+        <p>4+ years of work so far, from simple C++ systems to breadboard circuits. Every project below taught me something I kept.</p>
+        <p class="creed">I'm a <span class="underline">perfectionist</span>, an idealist, and an optimist — and I intend to change the world with engineering made in America.</p>
+      </div>
+      <div class="about-facts">
+        <div class="fact reveal" data-delay="1"><span class="k">Focus</span><span class="v red" style="font-size:1.05rem;white-space:nowrap">C-UAS / Photolithography / Quantum / Nuclear</span></div>
+        <div class="fact reveal" data-delay="1"><span class="k">Discipline</span><span class="v">Electrical Engineering</span></div>
+        <div class="fact reveal" data-delay="2"><span class="k">Experience</span><span class="v">2 Years Hands-On</span></div>
+        <div class="fact reveal" data-delay="2"><span class="k">GPA</span><span class="v">3.5 / 4.0</span></div>
+        <div class="fact reveal" data-delay="3"><span class="k">Location</span><span class="v">Minneapolis MN USA</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== EDUCATION ==================== -->
+<section id="education">
+  <svg class="edu-graph g1" viewBox="0 0 240 130" aria-hidden="true">
+    <line class="gridln" x1="20" y1="20" x2="220" y2="20"/><line class="gridln" x1="20" y1="50" x2="220" y2="50"/>
+    <line class="gridln" x1="20" y1="80" x2="220" y2="80"/><line class="gridln" x1="70" y1="10" x2="70" y2="110"/>
+    <line class="gridln" x1="120" y1="10" x2="120" y2="110"/><line class="gridln" x1="170" y1="10" x2="170" y2="110"/>
+    <line class="axis" x1="20" y1="110" x2="220" y2="110"/><line class="axis" x1="20" y1="10" x2="20" y2="110"/>
+    <path class="trace b" d="M20,60 C40,20 60,20 70,60 S100,100 120,60 S150,20 170,60 S200,100 220,60"/>
+  </svg>
+  <svg class="edu-graph g2" viewBox="0 0 210 120" aria-hidden="true">
+    <line class="axis" x1="15" y1="105" x2="200" y2="105"/><line class="axis" x1="15" y1="10" x2="15" y2="105"/>
+    <line class="target" x1="15" y1="32" x2="200" y2="32"/>
+    <path class="trace r" d="M15,105 C40,18 55,18 75,38 C95,52 110,28 130,33 C150,37 170,31 200,32"/>
+  </svg>
+  <div class="wrap">
+    <div class="eyebrow reveal">02 / Schooling &amp; Certification</div>
+    <h2 class="section-title reveal">The Paper Trail</h2>
+    <p class="section-sub reveal">Credentials in progress and on the wall.</p>
+    <div class="edu-grid">
+      <article class="edu-card reveal" data-delay="1">
+        <span class="status live">In Progress · Class of 2028</span>
+        <h3>B.S. Electrical Engineering</h3>
+        <div class="org mono">St. Cloud State University</div>
+        <p>Core EE curriculum — circuits, signals, electromagnetics — carried at a 3.5 GPA while building outside the classroom.</p>
+      </article>
+      <article class="edu-card reveal" data-delay="2">
+        <span class="status">Completed · 2026</span>
+        <h3>Basic Circuits Certificate</h3>
+        <div class="org mono">xMIT</div>
+        <p>MIT-built coursework in circuit analysis and design fundamentals — the bedrock under every project on this page.</p>
+      </article>
+      <article class="edu-card reveal" data-delay="3">
+        <span class="status live">In Progress</span>
+        <h3>FE Electrical &amp; Computer</h3>
+        <div class="org mono">NCEES</div>
+        <p>The first formal step toward Professional Engineer licensure. Preparing now, sitting for it ahead of graduation.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PROJECTS ==================== -->
+<section id="projects">
+  <span class="drag-item" style="top:3.5%;right:9%;--r:-4deg" aria-hidden="true">while(1)</span>
+  <div class="wrap">
+    <div class="eyebrow reveal">03 / Projects</div>
+    <h2 class="section-title reveal">Proof of Work</h2>
+    <p class="section-sub reveal">Each build listed with the skills it forged. No tutorials-for-credit — everything here runs.</p>
+    <div class="proj-list">
+
+      <article class="proj reveal">
+        <div class="idx mono">P-06</div>
+        <div>
+          <span class="status live" style="margin-bottom:12px">In Progress</span>
+          <h3>Drone Swarm Intelligence</h3>
+          <p>Swarm intelligence software for drones: coordination, formation, and decision-making across multiple agents acting as one system.</p>
+          <div class="skills">
+            <span class="chip">C++</span><span class="chip">Multi-Agent Systems</span><span class="chip">Path Planning</span><span class="chip">Simulation</span>
+          </div>
+        </div>
+        <div class="domain">Autonomy</div>
+      </article>
+
+      <article class="proj reveal">
+        <div class="idx mono">P-05</div>
+        <div>
+          <h3>Webcam ATR Software</h3>
+          <p>Completed automatic target recognition software running on a standard webcam feed — detecting and classifying targets in real time on commodity hardware.</p>
+          <div class="skills">
+            <span class="chip">Python</span><span class="chip">OpenCV</span><span class="chip">Computer Vision</span><span class="chip">Real-Time Processing</span>
+          </div>
+        </div>
+        <div class="domain">Vision</div>
+      </article>
+
+      <article class="proj reveal">
+        <div class="idx mono">P-04</div>
+        <div>
+          <h3>Radar System</h3>
+          <p>A working radar build — transmitting, receiving, and resolving targets. The most direct line on this page to Counter-UAS detection work.</p>
+          <div class="skills">
+            <span class="chip">RF Fundamentals</span><span class="chip">Signal Processing</span><span class="chip">Antennas</span><span class="chip">System Integration</span>
+          </div>
+        </div>
+        <div class="domain">RF / Defense</div>
+      </article>
+
+      <article class="proj reveal">
+        <div class="idx mono">P-03</div>
+        <div>
+          <h3>Handheld Game Player</h3>
+          <p>A self-contained handheld gaming device — display, input, and game logic running on embedded hardware I assembled and programmed.</p>
+          <div class="skills">
+            <span class="chip">Embedded C</span><span class="chip">Display Drivers</span><span class="chip">Input Handling</span><span class="chip">Power Budgeting</span>
+          </div>
+        </div>
+        <div class="domain">Embedded</div>
+      </article>
+
+      <article class="proj reveal">
+        <div class="idx mono">P-02</div>
+        <div>
+          <h3>Breadboard Piano</h3>
+          <p>Tone generation from first principles — utilizing timing IC, electrical resistance, a buzzer, and a few buttons made entirely on a breadboard.</p>
+          <div class="skills">
+            <span class="chip">555 Timing</span><span class="chip">Prototyping</span><span class="chip">Debugging</span><span class="chip">Schematic Reading</span>
+          </div>
+        </div>
+        <div class="domain">Analog</div>
+      </article>
+
+      <article class="proj reveal">
+        <div class="idx mono">P-01</div>
+        <div>
+          <h3>Arduino Text Display</h3>
+          <p>Where it started — driving a text display from an Arduino, learning that hardware listens when you speak precisely.</p>
+          <div class="skills">
+            <span class="chip">Arduino</span><span class="chip">Serial Comms</span><span class="chip">Microcontrollers</span><span class="chip">Wiring</span>
+          </div>
+        </div>
+        <div class="domain">Embedded</div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SKILLS (minimal) ==================== --> 
+<section id="skills"> 
+  <div class="wrap"> 
+    <div class="eyebrow reveal">84 / Total Skill Marker</div> 
+    
+    <div class="skills-bar reveal" data-delay="1"> 
+      <span class="skill-mark">Circuit Analysis</span> 
+      <span class="skill-mark">RF &amp; Radar</span> 
+      <span class="skill-mark">Embedded Systems</span> 
+      <span class="skill-mark">C / C++</span> 
+      <span class="skill-mark">Python</span> 
+      <span class="skill-mark">ESP32</span> 
+      <span class="skill-mark">PlatformIO</span> 
+      <span class="skill-mark">Arduino</span> 
+      <span class="skill-mark">Signal Processing</span> 
+      <span class="skill-mark">Audio Electronics</span> 
+      <span class="skill-mark">OOP Architecture</span> 
+      <span class="skill-mark">Prototyping</span> 
+      <span class="skill-mark">Debugging</span> 
+    </div> 
+  </div> 
+</section>
+
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer" id="contact">
+  <div class="wrap">
+    <span class="drag-item" style="top:14%;right:14%;--r:6deg" aria-hidden="true">&gt;_ hello</span>
+    <div class="big reveal">Let's Build Something<br><span style="color:var(--red)">That Matters</span></div>
+    <p class="sub reveal" data-delay="1">Internships, work opportunities, or a conversation — my inbox is open.</p>
+    <a class="btn solid reveal" data-delay="2" href="mailto:contact@eeconner.com">Contact Me by Email</a>
+    <div class="foot-row reveal" data-delay="3">
+      <a class="foot-link" href="https://x.com/eengineerco" target="_blank" rel="noopener" aria-label="X (Twitter)">
+        <svg viewBox="0 0 24 24"><path d="M18.9 1.2h3.7l-8.1 9.3L24 22.8h-7.5l-5.9-7.7-6.7 7.7H.2l8.7-9.9L0 1.2h7.7l5.3 7 5.9-7zm-1.3 19.4h2L6.6 3.3h-2.2l13.2 17.3z"/></svg>
+      </a>
+      <a class="foot-link" href="https://discord.com/users/americanengineer" target="_blank" rel="noopener" aria-label="Discord">
+        <svg viewBox="0 0 24 24"><path d="M20.3 4.4A19.8 19.8 0 0 0 15.4 3l-.6 1.2a18 18 0 0 0-5.5 0L8.7 3a19.7 19.7 0 0 0-5 1.5C.6 9.1-.3 13.7.2 18.2A19.9 19.9 0 0 0 6.3 21l1.3-2.1c-.7-.3-1.4-.6-2-1l.5-.4a14.2 14.2 0 0 0 12 0l.5.4c-.7.4-1.4.7-2.1 1L17.8 21a19.9 19.9 0 0 0 6-2.8c.6-5.2-.7-9.7-3.5-13.8zM8.1 15.3c-1.2 0-2.1-1-2.1-2.3s.9-2.3 2.1-2.3 2.1 1 2.1 2.3-1 2.3-2.1 2.3zm7.8 0c-1.2 0-2.1-1-2.1-2.3s.9-2.3 2.1-2.3 2.1 1 2.1 2.3-.9 2.3-2.1 2.3z"/></svg>
+      </a>
+      <span class="foot-co"><span class="c">C</span><span class="o">o</span></span>
+    </div>
+    <p class="fine">© 2023 EEConner.com — Engineered in America</p>
+  </div>
+</footer>
+
+
+<script>
+/* ============================================================
+   THEME — persisted across visits (localStorage, with safe fallback)
+   ============================================================ */
+(function(){
+  const btn = document.getElementById('themeBtn');
+  const root = document.documentElement;
+  let saved = null;
+  try { saved = localStorage.getItem('ee-theme'); } catch(e) {}
+  if (saved === 'light' || saved === 'dark') root.setAttribute('data-theme', saved);
+  syncIcon();
+  btn.addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('ee-theme', next); } catch(e) {}
+    syncIcon();
+  });
+  function syncIcon(){
+    btn.textContent = root.getAttribute('data-theme') === 'dark' ? '☀' : '☾';
+  }
+})();
+
+/* ============================================================
+   CYCLING HEADLINE WORD
+   ============================================================ */
+(function(){
+  const el = document.getElementById('cycleWord');
+  if (!el) return;
+  const words = ['American','Electrical','Perfect','Nuclear','Quantum','Optimistic','Robotic'];
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let i = 0;
+  setInterval(() => {
+    el.classList.add('swap');
+    setTimeout(() => {
+      i = (i + 1) % words.length;
+      el.textContent = words[i];
+      el.classList.remove('swap');
+    }, 360);
+  }, 2600);
+})();
+
+/* ============================================================
+   TYPING EFFECT — hero tagline cycles through mission lines
+   ============================================================ */
+(function(){
+  const target = document.getElementById('typeTarget');
+  if (!target) return;
+  const lines = [
+    '> Counter-UAS // detect. track. defeat.',
+    '> Electrical engineering, built in the USA.',
+    '> From breadboard to battlefield-ready.',
+    '> Precision is a personality trait.'
+  ];
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce){ target.textContent = lines[0]; return; }
+
+  let li = 0, ci = 0, deleting = false;
+  function tick(){
+    const line = lines[li];
+    if (!deleting){
+      ci++;
+      target.textContent = line.slice(0, ci);
+      if (ci === line.length){ deleting = true; return setTimeout(tick, 2200); }
+      return setTimeout(tick, 38 + Math.random() * 45);
+    } else {
+      ci--;
+      target.textContent = line.slice(0, ci);
+      if (ci === 0){ deleting = false; li = (li + 1) % lines.length; return setTimeout(tick, 450); }
+      return setTimeout(tick, 16);
+    }
+  }
+  tick();
+})();
+
+/* ============================================================
+   DRAGGABLES 
+   ============================================================ */
+(function(){
+  document.querySelectorAll('.drag-item').forEach(el => {
+    let dx = 0, dy = 0, sx = 0, sy = 0;
+    el.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      el.setPointerCapture(e.pointerId);
+      el.classList.add('dragging');
+      sx = e.clientX - dx; sy = e.clientY - dy;
+    });
+    el.addEventListener('pointermove', (e) => {
+      if (!el.classList.contains('dragging')) return;
+      dx = e.clientX - sx; dy = e.clientY - sy;
+      el.style.transform = 'translate(' + dx + 'px,' + dy + 'px) rotate(var(--r,0deg))';
+    });
+    const drop = () => el.classList.remove('dragging');
+    el.addEventListener('pointerup', drop);
+    el.addEventListener('pointercancel', drop);
+  });
+})();
+
+/* ============================================================
+   SCROLL REVEAL — IntersectionObserver
+   ============================================================ */
+(function(){
+  const items = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  items.forEach(i => io.observe(i));
+})();
+
+</script>
+</body>
+</html>
